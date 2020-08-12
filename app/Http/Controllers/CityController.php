@@ -52,7 +52,7 @@ class CityController extends Controller
         if ($request->session()->has('login') && $request->session()->get('login')) {
 
             // Session login tồn tại và có giá trị là true, chuyển hướng người dùng đến trang blog
-            return view('city.index');
+            return view('home');
         }
 
         // Session không tồn tại, người dùng chưa đăng nhập

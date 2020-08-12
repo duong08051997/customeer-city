@@ -28,50 +28,54 @@ class CustomerService
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $path = $image->store('image','public');
-            $customer->image=$path;
+            $path = $image->store('image', 'public');
+            $customer->image = $path;
         }
-        $customer->city_id  = $request->input('city_id');
-        $customer->name =$request->input('name');
-        $customer->date =$request->input('date');
-        $customer->email=$request->input('email');
+        $customer->city_id = $request->input('city_id');
+        $customer->name = $request->input('name');
+        $customer->date = $request->input('date');
+        $customer->email = $request->input('email');
         $this->customerRepository->save($customer);
     }
+
     public function findId($id)
     {
         return $this->customerRepository->findId($id);
     }
-    public function updateCustomer($request,$id)
-    {
-       $customer = $this->customerRepository->findId($id);
 
-       //cap nhat anh
+    public function updateCustomer($request, $id)
+    {
+        $customer = $this->customerRepository->findId($id);
+
+        //cap nhat anh
         if ($request->hasFile('image')) {
 //xoa anh cu neu co
-            $customerImg =$customer->image;
+            $customerImg = $customer->image;
             if ($customerImg) {
-                Storage::delete('/public'.$customerImg);
+                Storage::delete('/public' . $customerImg);
             }
             //cap nhat anh moi
-            $image =$request->file('image');
-            $path =$image->store('image','public');
-            $customer->image =$path;
+            $image = $request->file('image');
+            $path = $image->store('image', 'public');
+            $customer->image = $path;
         }
-        $customer->name =$request->input('name');
-        $customer->city_id =$request->input('city_id');
-        $customer->date =$request->input('date');
-        $customer->email =$request->input('email');
+        $customer->name = $request->input('name');
+        $customer->city_id = $request->input('city_id');
+        $customer->date = $request->input('date');
+        $customer->email = $request->input('email');
         $this->customerRepository->save($customer);
     }
+
     public function deleteCustomer($id)
     {
-       $customer= $this->customerRepository->findId($id);
-       $image =$customer->image;
-       //xoa anh
+        $customer = $this->customerRepository->findId($id);
+        $image = $customer->image;
+        //xoa anh
         if ($image) {
             Storage::delete('/public/image');
             $customer->delete();
         }
     }
+
 
 }

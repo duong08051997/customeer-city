@@ -7,11 +7,6 @@
                 <h1>Danh Sách Tỉnh Thành</h1>
             </div>
             <div class="col-12">
-                @if (Session::has('success'))
-                    <p class="text-success">
-                        <i class="fa fa-check" aria-hidden="true"></i>{{ Session::get('success') }}
-                    </p>
-                @endif
             </div>
             <table class="table table-striped">
                 <thead>

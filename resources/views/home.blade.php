@@ -9,6 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 </head>
+@if (Session::has('not-login'))
+    <div class="not-login">
+        <p class="text-danger">{{ Session::get('not-login') }}</p>
+    </div>
+@endif
 <body>
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,9 +51,11 @@
             <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
         </form>
+        <a href="{{ route('user.logout') }}">
+            <button type="button" class="btn btn-outline-primary">Đăng Xuất</button>
+        </a>
     </div>
 </nav>
-
 @yield('content')
 </div>
 </body>
