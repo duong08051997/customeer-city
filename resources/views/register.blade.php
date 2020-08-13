@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-    <title>login</title>
+    <title>Register</title>
     <style>
         html, body {
             background-color: #fff;
@@ -64,38 +64,54 @@
 </head>
 <body>
 <div class="container">
-@if (Session::has('login-fail'))
-    <div class="login-fail">
-        <p class="text-danger">{{ Session::get('login-fail') }}</p>
+
+    @if (Session::has('login-fail'))
+        <div class="login-fail">
+            <p class="text-danger">{{ Session::get('login-fail') }}</p>
+        </div>
+    @endif
+    <div class="title m-b-md">
+        Đăng kí
     </div>
-@endif
-<div class="title m-b-md">
-    Đăng nhập
-</div>
-<div class="form-login">
-    <form class="text-left" method="post" action="{{ route('user.login') }}">
-       @csrf
-        <div class="form-group">
-            <label for="inputUsername">email người dùng</label>
-            <input type="text"
-                   class="form-control"
-                   id="inputUsername"
-                   name="email"
-                   placeholder="Enter username"
-                   required>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password"
-                   class="form-control"
-                   id="inputPassword"
-                   name="password"
-                   placeholder="Password"
-                   required>
-        </div>
-        <button type="submit" class="btn btn-primary">Đăng nhập</button>
-    </form>
-</div>
+        @if (Session::has('success'))
+            <p class="text-success">
+                <i class="fa fa-check" aria-hidden="true"></i>{{ Session::get('success') }}
+            </p>
+        @endif
+    <div class="form-login">
+        <form class="text-left" method="post">
+            @csrf
+            <div class="form-group">
+                <label for="inputUsername">Tên người dùng</label>
+                <input type="text"
+                       class="form-control"
+                       id="inputUsername"
+                       name="name"
+                       placeholder="Enter username"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="inputUsername">email người dùng</label>
+                <input type="email"
+                       class="form-control"
+                       id="inputUsername"
+                       name="email"
+                       placeholder="Enter email"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password"
+                       class="form-control"
+                       id="inputPassword"
+                       name="password"
+                       placeholder="Password"
+                       required>
+            </div>
+            <button type="submit" class="btn btn-primary">Đăng kí</button>
+            <a href="{{route('user.login')}}" class="btn btn-success">Đăng nhập</a>
+        </form>
+    </div>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

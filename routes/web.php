@@ -12,27 +12,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::prefix('admin')->group(function () {
-//    Route::get('/', 'LoginController@showLogin')->name('show.login');
-//    Route::get('/login', 'LoginController@formLogin')->name('form.login');
-//    Route::post('/login', 'LoginController@login')->name('user.login');
-//    Route::get('/cities', 'BlogController@showBlog')->name('show.blog');
-//    Route::get('/logout', 'LogoutController@logout')->name('user.logout');
-//
+Route::get('/',function ()
+{
+    return view('welcome');
 
-//    Route::get('/', 'CustomerController@showLogin')->name('show.login');
-//    Route::get('/login', 'CustomerController@formLogin')->name('form.login');
-//    Route::post('/login', 'CustomerController@login')->name('user.login');
-//    Route::get('/cities', 'CustomerController@showBlog')->name('show.blog');
-//    Route::get('/logout', 'CustomerController@logout')->name('user.logout');
-//});
+});
+Route::prefix('admin')->group(function () {
 
+});
 Route::prefix('customers')->group(function () {
-    Route::get('/', 'CustomerController@showLogin')->name('show.login');
-    Route::get('/login', 'CustomerController@formLogin')->name('form.login');
-    Route::post('/login', 'CustomerController@login')->name('user.login');
-    Route::get('/cities', 'CustomerController@showBlog')->name('show.blog');
-    Route::get('/logout', 'CustomerController@logout')->name('user.logout');
+    Route::get('/register','RegisterController@formRegister')->name('form.register');
+    Route::post('/register','RegisterController@addUser')->name('user.create');
+    Route::get('/login', 'LoginController@showLogin')->name('form.login');
+    Route::post('/login', 'LoginController@login')->name('user.login');
+    Route::get('/logout', 'LogoutController@logout')->name('user.logout');
     Route::get('/index', 'CustomerController@index')->name('customers.index');
     Route::get('/create', 'CustomerController@create')->name('customers.create');
     Route::post('/create', 'CustomerController@store')->name('customers.store');

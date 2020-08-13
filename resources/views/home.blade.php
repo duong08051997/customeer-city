@@ -31,29 +31,22 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('cities.index')}}">Danh sách tỉnh thành</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{route('customers.search')}}" method="get">
             <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
         </form>
-        <a href="{{ route('user.logout') }}">
-            <button type="button" class="btn btn-outline-primary">Đăng Xuất</button>
-        </a>
+        <ul class="navbar-nav ml-auto  nav-item dropdown">
+            <li>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"><i class="material-icons icon">
+                        account_circle
+                    </i>{{\Illuminate\Support\Facades\Session::get('userLogin')->name}}</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('user.logout') }}">log out </a>
+                </div>
+            </li>
+        </ul>
     </div>
 </nav>
 @yield('content')
@@ -68,4 +61,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"
+      integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY="
+      crossorigin="anonymous"/>
 </html>
