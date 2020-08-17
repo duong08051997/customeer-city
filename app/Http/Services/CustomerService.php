@@ -73,8 +73,9 @@ class CustomerService
         //xoa anh
         if ($image) {
             Storage::delete('/public/image');
-            $customer->delete();
+           $customer->delete();
         }
+
     }
 
 
