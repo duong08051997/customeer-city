@@ -12,14 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',function ()
-{
-    return view('welcome');
 
-});
-Route::prefix('admin')->group(function () {
-
-});
 Route::prefix('customers')->group(function () {
     Route::get('/register','RegisterController@formRegister')->name('form.register');
     Route::post('/register','RegisterController@addUser')->name('user.create');
@@ -34,6 +27,7 @@ Route::prefix('customers')->group(function () {
     Route::get('/{id}/delete', 'CustomerController@delete')->name('customers.delete');
     Route::get('/filter', 'CustomerController@filterByCity')->name('customers.filterByCity');
     Route::get('/search', 'CustomerController@search')->name('customers.search');
+    Route::post('/{id}/filterCity','CustomerController@filterAjax');
 });
 Route::prefix('cities')->group(function () {
     Route::get('/', 'CityController@index')->name('cities.index');

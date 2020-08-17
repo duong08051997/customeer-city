@@ -1,14 +1,14 @@
 @extends('home')
 @section('title','danh sach khach hang')
 @section('content')
-    <a href="{{route('customers.create')}}" class="btn btn-success mt-4">Thêm mới</a>
+    <a href="{{route('customers.create')}}"  class="btn btn-success mt-4">Thêm mới</a>
     <div class="card mt-4">
         <div class="col-12">
             <h1>Danh Sách Khách Hàng</h1>
         </div>
-        <form action="{{ route('customers.filterByCity') }}" method="get">
+        <form action="{{ route('customers.filterByCity') }}" id="search-city" method="get">
             @csrf
-            <select class="custom-select " name="city_id" style="width: auto ;margin-left: 10px" >
+            <select class="custom-select " name="city_id" style="width: auto ;margin-left: 10px" id="select-city">
                 <option value="">Chọn tỉnh thành</option>
                 @foreach($cities as $city)
                     @if(isset($cityFilter))
@@ -24,7 +24,6 @@
                     @endif
                 @endforeach
             </select>
-            <button type="submit" id="submitAjax" class="btn btn-primary">Chọn</button>
         </form>
         <div class="col-12">
             @if (Session::has('success'))
@@ -32,6 +31,7 @@
                     <i class="fa fa-check" aria-hidden="true"></i>{{ Session::get('success') }}
                 </p>
             @endif
+
             @if(isset($totalCustomerFilter))
                 <span class="text-muted">
                     {{'Tìm thấy' . ' ' . $totalCustomerFilter . ' '. 'khách hàng:'}}
@@ -59,19 +59,18 @@
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="user-list">
                 @forelse($customers as $key => $customer)
-                    <tr>
+                    <tr class="customer-item" id="customer-{{$customer->id}}">
                         <th scope="row">{{++$key}}</th>
-                        <td><img src="{{asset('storage/'.$customer->image)}}" alt="khong co anh" width="50" height="50">
+                        <td id="search-img"><img src="{{asset('storage/'.$customer->image)}}"  alt="khong co anh" width="50" height="50">
                         </td>
-                        <td>{{$customer->name}}</td>
+                        <td id="search-name">{{$customer->name}}</td>
                         <td>{{$customer->date}}</td>
                         <td>{{$customer->email}}</td>
                         <td>{{$customer->city->name}}</td>
                         <td><a href="{{route('customers.edit',$customer->id)}}">sửa</a></td>
-                        <td><a href="{{route('customers.delete',$customer->id)}}" class="text-danger"
-                               onclick="return confirm('Bạn chắc chắn muốn xóa?')">xóa</a></td>
+                        <td><a href="" class="text-danger delete-customer" data-id="{{$customer->id}}">xóa</a></td>
                     </tr>
                 @empty
                     <tr>
@@ -80,6 +79,8 @@
                 @endforelse
                 </tbody>
             </table>
+        </div>
+        <div id="customer-list"><br>
         </div>
         {{ $customers->appends(request()->query()) }}
     </div>

@@ -27,7 +27,7 @@ class CreateCustomerRequest extends FormRequest
             'image'=>'required',
             'name'=>'required',
             'email'=>'required',
-            'date'=>'required|date|before:today'
+            'date'=>'required|date|before:today',
         ];
     }
     public function messages()

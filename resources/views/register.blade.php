@@ -88,7 +88,7 @@
                        id="inputUsername"
                        name="name"
                        placeholder="Enter username"
-                       required>
+                       >
             </div>
             <div class="form-group">
                 <label for="inputUsername">email người dùng</label>
@@ -97,7 +97,7 @@
                        id="inputUsername"
                        name="email"
                        placeholder="Enter email"
-                       required>
+                       >
             </div>
             <div class="form-group">
                 <label for="inputPassword">Password</label>
@@ -106,9 +106,18 @@
                        id="inputPassword"
                        name="password"
                        placeholder="Password"
-                       required>
+                       >
             </div>
-            <button type="submit" class="btn btn-primary">Đăng kí</button>
+            <div class="form-group">
+                <label for="inputPassword1">Repeat Password</label>
+                <input type="password"
+                       class="form-control"
+                       id="inputPassword1"
+                       name="password_confirmation"
+                       placeholder="Password"
+                       >
+            </div>
+            <button type="button" class="btn btn-primary" id="register" name="register">Đăng kí</button>
             <a href="{{route('user.login')}}" class="btn btn-success">Đăng nhập</a>
         </form>
     </div>

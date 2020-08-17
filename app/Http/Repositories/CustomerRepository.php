@@ -3,6 +3,7 @@ namespace App\Http\Repositories;
 
 use App\City;
 use App\Customer;
+use test\Mockery\ArgumentObjectTypeHint;
 
 class CustomerRepository
 {
@@ -14,8 +15,7 @@ class CustomerRepository
     }
     public function getAll()
     {
-       return $this->customer->paginate(5);
-
+       return $this->customer->orderBy('id','DESC')->paginate(4);
     }
     public function save($customer)
     {

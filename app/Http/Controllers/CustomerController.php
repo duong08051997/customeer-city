@@ -58,8 +58,13 @@ class CustomerController extends Controller
     public function delete($id)
     {
         $this->customerService->deleteCustomer($id);
-        Session::flash('success', 'Xóa thông tin khách hàng thành công');
-        return redirect()->route('customers.index');
+//        Session::flash('success', 'Xóa thông tin khách hàng thành công');
+//        return redirect()->route('customers.index');
+        $data = [
+            "status" => 'success',
+            "message" => 'delete success'
+        ];
+        return response()->json($data);
     }
     public function filterByCity(Request $request)
     {
@@ -67,7 +72,7 @@ class CustomerController extends Controller
         //kiem tra city co ton tai khong
         $cityFilter = $this->cityService->findId($idCity);
         //lay ra tat ca customer cua cityFilter
-        $customers = Customer::where('city_id',$cityFilter->id)->paginate(5);
+        $customers = Customer::where('city_id',$cityFilter->id)->paginate(4);
         $totalCustomerFilter =count($customers);
         $cities = $this->cityService->getAll();
         return view('customers.list',compact('customers','cities','totalCustomerFilter','cityFilter'));
@@ -79,10 +84,15 @@ class CustomerController extends Controller
         if (!$keyword) {
             return redirect()->route('customers.index');
         }
-        $customers = Customer::where('name','LIKE','%'.$keyword.'%')->paginate(5);
-       $cities = $this->cityService->getAll();
-        return view('customers.list',compact('customers','cities'));
+        $customers = Customer::where('name','LIKE','%'.$keyword.'%')->paginate(4);
+       return response()->json($customers);
     }
+ public function filterAjax(Request $request ,$id)
+ {
+     $cityFilter = $this->cityService->findId($id);
+     $customers = Customer::where('city_id',$cityFilter->id)->get();
+     return response()->json($customers);
 
+ }
 
 }
