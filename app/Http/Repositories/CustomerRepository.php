@@ -30,7 +30,13 @@ class CustomerRepository
         return $this->customer->findOrFail($id);
     }
 
+    public function search($keyword)
+    {
+        return $this->customer->where('name', 'LIKE', '%' . $keyword . '%')->paginate(4);
+    }
 
-
-
+    public function filterAjax($id)
+    {
+        return $this->customer->where('city_id', $id)->get();
+    }
 }

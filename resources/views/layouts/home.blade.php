@@ -9,17 +9,13 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
+    @toastr_css
     <base href="{{asset('')}}">
 </head>
-@if (Session::has('not-login'))
-    <div class="not-login">
-        <p class="text-danger">{{ Session::get('not-login') }}</p>
-    </div>
-@endif
 <body>
 <div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="{{route('customers.index')}}">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -35,7 +31,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{route('customers.search')}}" method="get">
-            <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm" id="customer-name"  aria-label="Search">
+            <input value="{{old('keyword')}}" class="form-control mr-sm-2" type="search" name="keyword" placeholder="Tìm kiếm" id="customer-name"  aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
         </form>
         <ul class="navbar-nav ml-auto  nav-item dropdown">
@@ -43,9 +39,9 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" style="color: #007bff"><i class="material-icons icon">
                         account_circle
-                    </i>{{\Illuminate\Support\Facades\Session::get('userLogin')->name}}</a>
+                    </i>{{\Illuminate\Support\Facades\Auth::user()->username}}</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('user.logout') }}">log out </a>
+                    <a class="dropdown-item" href="{{ route('users.logout') }}">log out </a>
                 </div>
             </li>
         </ul>
@@ -54,9 +50,6 @@
 @yield('content')
 </div>
 </body>
-{{--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"--}}
-{{--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"--}}
-{{--        crossorigin="anonymous"></script>--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -70,4 +63,7 @@
       integrity="sha256-x8PYmLKD83R9T/sYmJn1j3is/chhJdySyhet/JuHnfY="
       crossorigin="anonymous"/>
 <script src="{{asset('js/my.js')}}"></script>
+@jquery
+@toastr_js
+@toastr_render
 </html>

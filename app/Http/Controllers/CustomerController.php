@@ -8,6 +8,7 @@ use App\Http\Requests\CreateCustomerRequest;
 use App\Http\Services\CityService;
 use App\Http\Services\CustomerService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
@@ -23,15 +24,18 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $cities = $this->cityService->getAll();
-        $customers = $this->customerService->all();
-        return view('customers.list', compact('customers', 'cities'));
+        if (Auth::check()) {
+            $cities = $this->cityService->getAll();
+            $customers = $this->customerService->all();
+            return view('layouts.customers.list', compact('customers', 'cities'));
+        }
+       return view('login');
     }
 
     public function create()
     {
         $cities = $this->cityService->getAll();
-        return view('customers.create', compact('cities'));
+        return view('layouts.customers.create', compact('cities'));
     }
 
     public function store(CreateCustomerRequest $request)
@@ -45,7 +49,7 @@ class CustomerController extends Controller
     {
         $customer = $this->customerService->findId($id);
         $cities = $this->cityService->getAll();
-        return view('customers.edit', compact('customer', 'cities'));
+        return view('layouts.customers.edit', compact('customer', 'cities'));
     }
 
     public function update(Request $request, $id)
@@ -59,42 +63,24 @@ class CustomerController extends Controller
     {
 
         $this->customerService->deleteCustomer($id);
-        $data = [
-            "status" => 'success',
-            "message" => 'delete success'
+        $result = [
+            'status' => 'success',
+            'message' => 'xoa thanh cong'
         ];
-        return response()->json($data);
-    }
-
-    public function filterByCity(Request $request)
-    {
-        $idCity = $request->input('city_id');
-        //kiem tra city co ton tai khong
-        $cityFilter = $this->cityService->findId($idCity);
-        //lay ra tat ca customer cua cityFilter
-        $customers = Customer::where('city_id', $cityFilter->id)->paginate(4);
-        $totalCustomerFilter = count($customers);
-        $cities = $this->cityService->getAll();
-        return view('customers.list', compact('customers', 'cities', 'totalCustomerFilter', 'cityFilter'));
-
+        return response()->json($result);
     }
 
     public function search(Request $request)
     {
-        $keyword = $request->input('keyword');
-        if (!$keyword) {
-            return redirect()->route('customers.index');
-        }
-        $customers = Customer::where('name', 'LIKE', '%' . $keyword . '%')->paginate(4);
-        return response()->json($customers);
+        $cities = $this->cityService->getAll();
+        $customers = $this->customerService->search($request);
+        return view('layouts.customers.list', compact('customers', 'cities'));
     }
 
-    public function filterAjax(Request $request, $id)
+    public function filterAjax($id)
     {
-        $cityFilter = $this->cityService->findId($id);
-        $customers = Customer::where('city_id', $cityFilter->id)->get();
+        $customers = $this->customerService->fitterAjax($id);
         return response()->json($customers);
-
     }
 
 }

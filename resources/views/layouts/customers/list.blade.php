@@ -1,8 +1,8 @@
-@extends('home')
+@extends('layouts.home')
 @section('title','danh sach khach hang')
 @section('content')
     <a href="{{route('customers.create')}}"  class="btn btn-success mt-4">Thêm mới</a>
-    <div class="card mt-4">
+    <div class="card mt-4 ">
         <div class="col-12">
             <h1>Danh Sách Khách Hàng</h1>
         </div>
@@ -63,14 +63,14 @@
                 @forelse($customers as $key => $customer)
                     <tr class="customer-item" id="customer-{{$customer->id}}">
                         <th scope="row">{{++$key}}</th>
-                        <td id="search-img"><img src="{{asset('storage/'.$customer->image)}}"  alt="khong co anh" width="50" height="50">
+                        <td id="search-img"><img src="{{asset('storage/'.$customer->image)}}"  alt="không có ảnh" width="50" height="50">
                         </td>
                         <td id="search-name">{{$customer->name}}</td>
                         <td>{{$customer->date}}</td>
                         <td>{{$customer->email}}</td>
                         <td>{{$customer->city->name}}</td>
-                        <td><a href="{{route('customers.edit',$customer->id)}}">sửa</a></td>
-                        <td><a href="" class="text-danger delete-customer" data-id="{{$customer->id}}">xóa</a></td>
+                        <td><a class="btn btn-primary" href="{{route('customers.edit',$customer->id)}}">sửa</a></td>
+                        <td><button class="btn btn-danger delete-customer" data-id="{{$customer->id}}">xóa</button></td>
                     </tr>
                 @empty
                     <tr>
@@ -80,8 +80,8 @@
                 </tbody>
             </table>
         </div>
-        <div id="customer-list"><br>
         </div>
+    <div id="customer-list"></div>
         {{ $customers->appends(request()->query()) }}
     </div>
 

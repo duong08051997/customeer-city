@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCustomerRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,20 +24,18 @@ class CreateCustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'image'=>'required',
-            'name'=>'required',
+            'username'=>'required',
             'email'=>'required',
-            'date'=>'required|date|before:today',
+            'password'=>'required|min:2'
         ];
     }
     public function messages()
     {
         return [
-            'image.required'=>'Ảnh không được để trống',
-            'name.required'=>'Tên khách hàng không được để trống ',
+            'username.required'=>'Tên đăng kí không được để trống ',
             'email.required'=>'Email không được để trống',
-            'date.required'=>'Ngày sinh không được để trống',
-            'date.before'=>'Ngày sinh không đúng'
+            'password.required'=>'Password không được để trống',
+            'password.min'=>'Password không được ít hơn 2 kí tự'
         ];
     }
 }

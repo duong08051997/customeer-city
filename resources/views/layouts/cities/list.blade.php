@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.home')
 @section('title', 'Danh sách tỉnh thành')
 @section('content')
     <a class="btn btn-success mt-4 " href="{{route('cities.create')}}">Thêm mới</a>
@@ -11,7 +11,7 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">STT</th>
                     <th scope="col">Tên tỉnh thành</th>
                     <th scope="col">Số khách hàng</th>
                     <th></th>

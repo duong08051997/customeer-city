@@ -1,10 +1,10 @@
-@extends('home')
+@extends('layouts.home')
 @section('title', 'Cập nhật thông tin tỉnh thành')
 @section('content')
     <div class="col-12 col-md-12">
         <div class="row">
             <div class="col-12">
-                <h1>Chỉnh sử thông tin tỉnh thành</h1>
+                <h1>Cập nhật thông tin tỉnh thành</h1>
             </div>
             <div class="col-12">
                 <form method="post" >

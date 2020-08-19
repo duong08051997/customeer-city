@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.home')
 @section('title','Thêm mới khách hàng')
 @section('content')
 
@@ -9,7 +9,7 @@
 <form method="post" enctype="multipart/form-data">
     @csrf
     @if($errors->all())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="    alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Error! </strong> Thao tác thêm mới không thành công!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -18,14 +18,14 @@
     @endif
     <div class="form-group">
         <label>Ảnh khách hàng</label>
-        <input type="file" class="form-control  @if($errors->has('image'))border border-danger @endif" name="image">
+        <input type="file" class="form-control  @if($errors->has('image'))border border-danger @endif" name="image" value="{{old('image')}}">
         @if($errors->has('image'))
             <p class="text-danger">{{$errors->first('image')}}</p>
         @endif
     </div>
     <div class="form-group">
         <label>Tên khách hàng</label>
-        <input type="text" class="form-control @if($errors->has('name'))border border-danger @endif" name="name" placeholder="ten khach hang" value="{{old('name')}}">
+        <input type="text" class="form-control @if($errors->has('name'))border border-danger @endif" name="name" placeholder="tên khách hàng" value="{{old('name')}}">
         @if($errors->has('name'))
             <p class="text-danger">{{ $errors->first('name') }}</p>
         @endif
@@ -33,7 +33,7 @@
     </div>
     <div class="form-group">
         <label >Email khách hàng</label>
-        <input type="email" class="form-control @if($errors->has('email'))border border-danger @endif" name="email" placeholder="email khach hang" value="{{old('email')}}">
+        <input type="email" class="form-control @if($errors->has('email'))border border-danger @endif" name="email" placeholder="xxx@gmail.com" value="{{old('email')}}">
     </div>
     @if($errors->has('email'))
         <p class="text-danger">{{ $errors->first('email') }}</p>

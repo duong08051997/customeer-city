@@ -10,10 +10,13 @@ use Illuminate\Support\Facades\Storage;
 class CustomerService
 {
     protected $customerRepository;
+    protected $cityService;
 
-    public function __construct(CustomerRepository $customerRepository)
+    public function __construct(CustomerRepository $customerRepository,
+                                CityService $cityService)
     {
         $this->customerRepository = $customerRepository;
+        $this->cityService = $cityService;
     }
 
     public function all()
@@ -73,9 +76,20 @@ class CustomerService
         //xoa anh
         if ($image) {
             Storage::delete('/public/image');
-           $customer->delete();
+            $customer->delete();
         }
 
+    }
+
+    public function search($request)
+    {
+        $keyword = $request->input('keyword');
+        return $this->customerRepository->search($keyword);
+    }
+
+    public function fitterAjax($id)
+    {
+        return $this->customerRepository->filterAjax($id);
     }
 
 

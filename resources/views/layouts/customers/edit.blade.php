@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.home')
 @section('title', 'Cập nhật thông tin khách hàng')
 @section('content')
     <div class="col-12 col-md-12">
@@ -37,7 +37,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                    <button type="submit" class="btn btn-primary edit-customer">Chỉnh sửa</button>
                     <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Hủy</button>
                 </form>
             </div>

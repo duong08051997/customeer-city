@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-    <title>login</title>
+    <title>Đăng nhập</title>
+    @toastr_css
     <style>
         html, body {
             background-color: #fff;
@@ -64,25 +65,20 @@
 </head>
 <body>
 <div class="container">
-@if (Session::has('login-fail'))
-    <div class="login-fail">
-        <p class="text-danger">{{ Session::get('login-fail') }}</p>
-    </div>
-@endif
 <div class="title m-b-md">
     Đăng nhập
 </div>
 <div class="form-login">
-    <form class="text-left" method="post" action="{{ route('user.login') }}">
+    <form class="text-left" method="post" action="{{ route('users.login') }}">
        @csrf
         <div class="form-group">
-            <label for="inputUsername">email người dùng</label>
-            <input type="text"
+            <label>Email người dùng</label>
+            <input type="email"
                    class="form-control"
-                   id="inputUsername"
                    name="email"
-                   placeholder="Enter username"
-                   required>
+                   value="{{old('email')}}"
+                   placeholder="exam@gmail.com"
+            >
         </div>
         <div class="form-group">
             <label for="inputPassword">Password</label>
@@ -91,9 +87,10 @@
                    id="inputPassword"
                    name="password"
                    placeholder="Password"
-                   required>
+                   >
         </div>
         <button type="submit" class="btn btn-primary">Đăng nhập</button>
+        <a href="{{route('form.register')}}" class="btn btn-success">Đăng kí mới</a>
     </form>
 </div>
 </div>
@@ -107,5 +104,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+@jquery
+@toastr_js
+@toastr_render
 </html>
 

@@ -18,14 +18,14 @@ $(document).ready(function () {
             }
         })
     }
-
     $('.delete-customer').click(function () {
-        // if (confirm("ban chac chan muon xoa")) {
+        if (confirm("ban chac chan muon xoa")) {
             let id = $(this).attr('data-id');
             console.log(id)
-            // deleteCustomer(id);
-        // }
+            deleteCustomer(id);
+        }
     })
+
     $("select[id='select-city']").change(function () {
         let city_id = $(this).val();
         console.log(city_id);
@@ -49,7 +49,6 @@ $(document).ready(function () {
                 let html = ''
                 if (result.length !==0) {
                 $.each(result, function (key, value) {
-
                         html += ' <tr>';
                         html += '<td scope="row">';
                         html += key;
@@ -67,7 +66,7 @@ $(document).ready(function () {
                         html += value.email;
                         html += '</td>';
                         html += '<td scope="row">';
-                        html += value.city_id;
+                        html += '';
                         html += '</td>';
                         html += '</tr>'
 
@@ -83,24 +82,21 @@ $(document).ready(function () {
 
         })
     })
-    $('#customer-name').on('keyup', function () { //bắt sự kiện keyup khi người dùng gõ từ khóa tim kiếm
-        let query = $(this).val(); //lấy gía trị ng dùng gõ
-        if (query != '') //kiểm tra khác rỗng thì thực hiện đoạn lệnh bên dưới
-        {
-            let keyword = $('input[name="keyword"]').val(); // token để mã hóa dữ liệu
-            $.ajax({
-                url: origin + '/customers/index', // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
-                method: "GET", // phương thức gửi dữ liệu.
-                data: {query: query, _token: keyword},
-                success: function (data) { //dữ liệu nhận về
-                    $('#customer-list').fadeIn();
-                    $('#customer-list').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là countryList
-                }
-
-            });
-
-
-        }
-    });
+    // $('#customer-name').on('keyup', function () {
+    //     let query = $(this).val();
+    //     if (query !== '')
+    //     {
+    //         let keyword = $('input[name="keyword"]').val();
+    //         $.ajax({
+    //             url: origin + '/customers/search',
+    //             method: "GET",
+    //             data: {name: query,_token:keyword},
+    //             success: function () {
+    //                 $('#customer-list').fadeIn();
+    //                 $('#customer-list').html(html);
+    //             }
+    //         });
+    //     }
+    // });
 
 })

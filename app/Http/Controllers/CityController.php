@@ -17,11 +17,11 @@ class CityController extends Controller
     public function index()
     {
         $cities =$this->cityService->getAll();
-        return view('cities.list',compact('cities'));
+        return view('layouts.cities.list',compact('cities'));
     }
     public function create()
     {
-        return view('cities.create');
+        return view('layouts.cities.create');
     }
     public function store(Request $request)
     {
@@ -32,7 +32,7 @@ class CityController extends Controller
     public function edit($id)
     {
        $city = $this->cityService->findId($id);
-        return view('cities.edit',compact('city'));
+        return view('layouts.cities.edit',compact('city'));
     }
     public function update(Request $request,$id)
     {
@@ -46,21 +46,13 @@ class CityController extends Controller
         Session::flash('success','Xóa thành phố thành công');
         return redirect()->route('cities.index');
     }
-    public function showBlog(Request $request)
-    {
-        // Kiểm tra Session login có tồn tại hay không
-        if ($request->session()->has('login') && $request->session()->get('login')) {
-
-            // Session login tồn tại và có giá trị là true, chuyển hướng người dùng đến trang blog
-            return view('home');
-        }
-
-        // Session không tồn tại, người dùng chưa đăng nhập
-        // Gán một thông báo vào Session not-login
-        $message = 'Bạn chưa đăng nhập.';
-        $request->session()->flash('not-login', $message);
-
-        // Chuyển hướng về trang đăng nhập
-        return view('login');
-    }
+//    public function showBlog(Request $request)
+//    {
+//        if ($request->session()->has('login') && $request->session()->get('login')) {
+//            return view('home');
+//        }
+//        $message = 'Bạn chưa đăng nhập.';
+//        $request->session()->flash('not-login', $message);
+//        return view('login');
+//    }
 }
