@@ -79,6 +79,9 @@
                    value="{{old('email')}}"
                    placeholder="exam@gmail.com"
             >
+            @if($errors->has('email'))
+                <p class="text-danger">{{$errors->first('email')}}</p>
+            @endif
         </div>
         <div class="form-group">
             <label for="inputPassword">Password</label>
@@ -88,6 +91,9 @@
                    name="password"
                    placeholder="Password"
                    >
+            @if($errors->has('password'))
+                <p class="text-danger">{{$errors->first('password')}}</p>
+            @endif
         </div>
         <button type="submit" class="btn btn-primary">Đăng nhập</button>
         <a href="{{route('form.register')}}" class="btn btn-success">Đăng kí mới</a>

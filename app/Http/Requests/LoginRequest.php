@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required',
+            'email'=>'required|email',
             'password'=>'required|min:2'
         ];
     }
@@ -32,6 +32,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email.required'=>'Email không được để trống',
+            'email.email'=>'Email không đúng định dạng',
             'password.required'=>'Password không được để trống',
             'password.min'=>'Password không được ít hơn 2 kí tự'
 
