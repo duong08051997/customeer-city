@@ -19,10 +19,6 @@ Route::get('/','AuthController@showFormLogin')->name('login');
 Route::post('login','AuthController@login')->name('users.login');
 Route::get('/logout', 'AuthController@logout')->name('users.logout');
 Route::prefix('customers')->group(function () {
-
-//    Route::get('/login', 'LoginController@showLogin')->name('form.login');
-//    Route::post('/login', 'LoginController@login')->name('user.login');
-
     Route::get('/index', 'CustomerController@index')->name('customers.index');
     Route::get('/create', 'CustomerController@create')->name('customers.create');
     Route::post('/create', 'CustomerController@store')->name('customers.store');

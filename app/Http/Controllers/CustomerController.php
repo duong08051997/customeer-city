@@ -76,7 +76,6 @@ class CustomerController extends Controller
         $customers = $this->customerService->search($request);
         return view('layouts.customers.list', compact('customers', 'cities'));
     }
-
     public function filterAjax($id)
     {
         $customers = $this->customerService->fitterAjax($id);

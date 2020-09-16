@@ -35,7 +35,6 @@ class LoginRequest extends FormRequest
             'email.email'=>'Email không đúng định dạng',
             'password.required'=>'Password không được để trống',
             'password.min'=>'Password không được ít hơn 2 kí tự'
-
         ];
 
 
